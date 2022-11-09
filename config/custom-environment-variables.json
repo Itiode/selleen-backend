@@ -1,0 +1,13 @@
+{
+  "dbUrl": "selleen_dbUrl",
+  "jwtAuthPrivateKey": "selleen_jwtAuthPrivateKey",
+  "awsBucketName": "selleen_awsBucketName",
+  "awsBucketRegion": "selleen_awsBucketRegion",
+  "awsBucketAccessKeyId": "selleen_awsBucketAccessKeyId",
+  "awsBucketSecretAccessKey": "selleen_awsBucketSecretAccessKey",
+  "flutterwavePublicKey": "selleen_flutterwavePublicKey",
+  "flutterwaveSecretKey": "selleen_flutterwaveSecretKey",
+  "flutterwaveSecretHash": "selleen_flutterwaveSecretHash",
+  "appApiUrl": "selleen_appApiUrl",
+  "internalEndpointSecretHash": "selleen_internalEndpointSecretHash"
+}
