@@ -194,15 +194,19 @@ export const deleteProductImages: RequestHandler<
       _id: req.params.productId,
       "shop.id": req.params.shopId,
     }).select("images -_id");
+
     if (!prod) {
       return res.status(404).send({ message: "No product with the given ID" });
     }
 
-    for (const img of prod.images) {
-      await deleteFileFromS3(img.url);
+    if (prod.images && prod.images.length > 0) {
+      for (const img of prod.images) {
+        await deleteFileFromS3(img.url);
+      }
+      res.send({ message: "Product images deleted successfully" });
+    } else {
+      res.send({ message: "No existing product images" });
     }
-
-    res.send({ message: "Images deleted successfully" });
   } catch (e) {
     next(new Error("Error in deleting images: " + e));
   }

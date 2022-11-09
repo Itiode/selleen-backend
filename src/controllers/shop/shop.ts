@@ -226,9 +226,12 @@ export const deleteLogo: RequestHandler<SimpleReqParam, SimpleResBody> = async (
       return res.status(404).send({ message: "No shop with the given ID" });
     }
 
-    await deleteFileFromS3(shop.logo.url);
-
-    res.send({ message: "Image deleted successfully" });
+    if (shop.logo) {
+      await deleteFileFromS3(shop.logo.url);
+      res.send({ message: "Logo deleted successfully" });
+    } else {
+      res.send({ message: "No existing logo" });
+    }
   } catch (e) {
     next(new Error("Error in deleting image: " + e));
   }
@@ -269,15 +272,19 @@ export const deleteBanners: RequestHandler<
     const shop = await ShopModel.findById(req.params.shopId).select(
       "banners -_id"
     );
+
     if (!shop) {
       return res.status(404).send({ message: "No shop with the given ID" });
     }
 
-    for (const img of shop.banners) {
-      await deleteFileFromS3(img.url);
+    if (shop.banners && shop.banners.length > 0) {
+      for (const img of shop.banners) {
+        await deleteFileFromS3(img.url);
+      }
+      res.send({ message: "Banners deleted successfully" });
+    } else {
+      res.send({ message: "No existing banners" });
     }
-
-    res.send({ message: "Images deleted successfully" });
   } catch (e) {
     next(new Error("Error in deleting images: " + e));
   }
@@ -338,9 +345,12 @@ export const deletePersonalId: RequestHandler<
       return res.status(404).send({ message: "No shop with the given ID" });
     }
 
-    await deleteFileFromS3(shop.personalId.url);
-
-    res.send({ message: "Personal ID deleted successfully" });
+    if (shop.personalId) {
+      await deleteFileFromS3(shop.personalId.url);
+      res.send({ message: "Personal ID deleted successfully" });
+    } else {
+      res.send({ message: "No existing personal ID" });
+    }
   } catch (e) {
     next(new Error("Error in deleting personal ID: " + e));
   }
