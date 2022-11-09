@@ -2,13 +2,13 @@
   "port": "3000",
   "dbUrl": "mongodb://DESKTOP-8P5PIPG:27017,DESKTOP-8P5PIPG:27018,DESKTOP-8P5PIPG:27019/selleen?replicaSet=rs",
   "jwtAuthPrivateKey": "unsecureJwtAuthPrivateKey",
-  "awsBucketName": "selleen.com",
+  "awsBucketName": "selleen",
   "awsBucketRegion": "af-south-1",
   "awsBucketAccessKeyId": "AKIAYZTTPMYCD6WZZ64T",
   "awsBucketSecretAccessKey": "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",
   "flutterwavePublicKey": "FLWPUBK_TEST-ff4dee355508ffc4338322eee0ece820-X",
   "flutterwaveSecretKey": "FLWSECK_TEST-d65949efb8670de7a06eb61ff8cfeca8-X",
   "flutterwaveSecretHash": "AC*7&SellCZar=**^#AGfjeen_TEST",
-  "appApiUrl": "https://selleen-api.herokuapp.com/api/",
+  "appApiUrl": "https://selleen-engine.herokuapp.com/api/",
   "internalEndpointSecretHash": "DDGAt7^yacg*7!jah**"
 }
