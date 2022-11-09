@@ -52,9 +52,9 @@ export const getProducts: RequestHandler<
     } else {
       prods = await ProdModel.find({
         approved: true,
-        // location: {
-        //   $near: { $geometry: { type: "Point", coordinates: [lng, lat] } },
-        // },
+        location: {
+          $near: { $geometry: { type: "Point", coordinates: [lng, lat] } },
+        },
       })
         .skip((pageNumber - 1) * pageSize)
         .limit(pageSize)
