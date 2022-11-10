@@ -198,8 +198,13 @@ const deleteLogo = async (req, res, next) => {
         if (!shop) {
             return res.status(404).send({ message: "No shop with the given ID" });
         }
-        await (0, s3_1.deleteFileFromS3)(shop.logo.url);
-        res.send({ message: "Image deleted successfully" });
+        if (shop.logo) {
+            await (0, s3_1.deleteFileFromS3)(shop.logo.url);
+            res.send({ message: "Logo deleted successfully" });
+        }
+        else {
+            res.send({ message: "No existing logo" });
+        }
     }
     catch (e) {
         next(new Error("Error in deleting image: " + e));
@@ -230,10 +235,15 @@ const deleteBanners = async (req, res, next) => {
         if (!shop) {
             return res.status(404).send({ message: "No shop with the given ID" });
         }
-        for (const img of shop.banners) {
-            await (0, s3_1.deleteFileFromS3)(img.url);
+        if (shop.banners && shop.banners.length > 0) {
+            for (const img of shop.banners) {
+                await (0, s3_1.deleteFileFromS3)(img.url);
+            }
+            res.send({ message: "Banners deleted successfully" });
         }
-        res.send({ message: "Images deleted successfully" });
+        else {
+            res.send({ message: "No existing banners" });
+        }
     }
     catch (e) {
         next(new Error("Error in deleting images: " + e));
@@ -276,8 +286,13 @@ const deletePersonalId = async (req, res, next) => {
         if (!shop) {
             return res.status(404).send({ message: "No shop with the given ID" });
         }
-        await (0, s3_1.deleteFileFromS3)(shop.personalId.url);
-        res.send({ message: "Personal ID deleted successfully" });
+        if (shop.personalId) {
+            await (0, s3_1.deleteFileFromS3)(shop.personalId.url);
+            res.send({ message: "Personal ID deleted successfully" });
+        }
+        else {
+            res.send({ message: "No existing personal ID" });
+        }
     }
     catch (e) {
         next(new Error("Error in deleting personal ID: " + e));

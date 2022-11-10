@@ -167,10 +167,15 @@ const deleteProductImages = async (req, res, next) => {
         if (!prod) {
             return res.status(404).send({ message: "No product with the given ID" });
         }
-        for (const img of prod.images) {
-            await (0, s3_1.deleteFileFromS3)(img.url);
+        if (prod.images && prod.images.length > 0) {
+            for (const img of prod.images) {
+                await (0, s3_1.deleteFileFromS3)(img.url);
+            }
+            res.send({ message: "Product images deleted successfully" });
         }
-        res.send({ message: "Images deleted successfully" });
+        else {
+            res.send({ message: "No existing product images" });
+        }
     }
     catch (e) {
         next(new Error("Error in deleting images: " + e));

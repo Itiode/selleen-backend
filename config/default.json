@@ -2,7 +2,7 @@
   "port": "3000",
   "dbUrl": "mongodb://DESKTOP-8P5PIPG:27017,DESKTOP-8P5PIPG:27018,DESKTOP-8P5PIPG:27019/selleen?replicaSet=rs",
   "jwtAuthPrivateKey": "unsecureJwtAuthPrivateKey",
-  "awsBucketName": "selleen",
+  "awsBucketName": "selleen.com",
   "awsBucketRegion": "af-south-1",
   "awsBucketAccessKeyId": "AKIAYZTTPMYCD6WZZ64T",
   "awsBucketSecretAccessKey": "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",

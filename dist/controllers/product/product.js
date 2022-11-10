@@ -45,9 +45,9 @@ const getProducts = async (req, res, next) => {
         else {
             prods = await product_1.default.find({
                 approved: true,
-                // location: {
-                //   $near: { $geometry: { type: "Point", coordinates: [lng, lat] } },
-                // },
+                location: {
+                    $near: { $geometry: { type: "Point", coordinates: [lng, lat] } },
+                },
             })
                 .skip((pageNumber - 1) * pageSize)
                 .limit(pageSize)

@@ -29,12 +29,12 @@ exports.initiateBankTransfer = initiateBankTransfer;
 async function initiateTransfer(data) {
     try {
         const details = {
-            account_bank: 'Access Bank',
-            account_number: '0690000031',
+            account_bank: data.bankName,
+            account_number: data.accountNumber,
             amount: data.amount,
             currency: "NGN",
             narration: "Settlement for processed orders (Selleen).",
-            reference: `${getTransferRef()}_PMCKDU_1`,
+            reference: `${getTransferRef()}`,
         };
         return await flw.Transfer.initiate(details);
     }
