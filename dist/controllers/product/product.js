@@ -42,6 +42,14 @@ const getProducts = async (req, res, next) => {
                 .limit(pageSize)
                 .select("name price shop images");
         }
+        else if (!lat || !lng) {
+            prods = await product_1.default.find({
+                approved: true,
+            })
+                .skip((pageNumber - 1) * pageSize)
+                .limit(pageSize)
+                .select("name price shop images");
+        }
         else {
             prods = await product_1.default.find({
                 approved: true,
