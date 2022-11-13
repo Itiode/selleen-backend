@@ -42,7 +42,6 @@ export const getProducts: RequestHandler<
     let prods = [];
 
     if (searchText) {
-      console.log("if");
       prods = await ProdModel.find({
         $text: { $search: searchText },
         approved: true,
@@ -50,8 +49,7 @@ export const getProducts: RequestHandler<
         .skip((pageNumber - 1) * pageSize)
         .limit(pageSize)
         .select("name price shop images");
-    } else if (!lat || !lng) {
-      console.log("else if");
+    } else if (lat === "undefined" || !lat || lng === "undefined" || !lng) {
       prods = await ProdModel.find({
         approved: true,
       })
@@ -59,7 +57,6 @@ export const getProducts: RequestHandler<
         .limit(pageSize)
         .select("name price shop images");
     } else {
-      console.log("else");
       prods = await ProdModel.find({
         approved: true,
         location: {

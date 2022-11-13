@@ -82,8 +82,8 @@ export interface GetProductsReqQuery {
   searchText: string;
   pageNumber: number;
   pageSize: number;
-  lat?: number;
-  lng?: number;
+  lat?: string;
+  lng?: string;
 }
 
 export interface CartProduct {
