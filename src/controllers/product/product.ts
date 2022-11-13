@@ -36,8 +36,8 @@ export const getProducts: RequestHandler<
     const searchText = req.query.searchText;
     const pageNumber = +req.query.pageNumber;
     const pageSize = +req.query.pageSize;
-    const lat = req.query?.lat;
-    const lng = req.query?.lng;
+    const lat = req.query.lat;
+    const lng = req.query.lng;
 
     let prods = [];
 
@@ -49,7 +49,7 @@ export const getProducts: RequestHandler<
         .skip((pageNumber - 1) * pageSize)
         .limit(pageSize)
         .select("name price shop images");
-    } else if (lat == undefined || lng == undefined) {
+    } else if (!lat || !lng) {
       prods = await ProdModel.find({
         approved: true,
       })

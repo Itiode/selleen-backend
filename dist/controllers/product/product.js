@@ -29,8 +29,8 @@ const getProducts = async (req, res, next) => {
         const searchText = req.query.searchText;
         const pageNumber = +req.query.pageNumber;
         const pageSize = +req.query.pageSize;
-        const lat = req.query?.lat;
-        const lng = req.query?.lng;
+        const lat = req.query.lat;
+        const lng = req.query.lng;
         let prods = [];
         if (searchText) {
             prods = await product_1.default.find({
@@ -41,7 +41,7 @@ const getProducts = async (req, res, next) => {
                 .limit(pageSize)
                 .select("name price shop images");
         }
-        else if (lat == undefined || lng == undefined) {
+        else if (!lat || !lng) {
             prods = await product_1.default.find({
                 approved: true,
             })
