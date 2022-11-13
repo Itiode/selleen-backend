@@ -49,7 +49,7 @@ export const getProducts: RequestHandler<
         .skip((pageNumber - 1) * pageSize)
         .limit(pageSize)
         .select("name price shop images");
-    } else if (!lat || !lng) {
+    } else if (lat == undefined || lng == undefined) {
       prods = await ProdModel.find({
         approved: true,
       })

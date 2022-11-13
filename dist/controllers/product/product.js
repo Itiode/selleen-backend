@@ -41,7 +41,7 @@ const getProducts = async (req, res, next) => {
                 .limit(pageSize)
                 .select("name price shop images");
         }
-        else if (!lat || !lng) {
+        else if (lat == undefined || lng == undefined) {
             prods = await product_1.default.find({
                 approved: true,
             })
