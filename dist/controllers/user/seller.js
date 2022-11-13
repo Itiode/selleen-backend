@@ -55,7 +55,7 @@ const getTodos = async (req, res, next) => {
         if (!shop.paymentDetails.bankAccountDetails.accountName)
             todos.push({ message: "Add your bank account details" });
         if (!shop.socialMediaLinks || shop.socialMediaLinks.length < 1)
-            todos.push({ message: "Add your shops's social media link(s)." });
+            todos.push({ message: "Add your shop's social media link(s)." });
         if (!shop.personalId)
             todos.push({
                 message: "Add a personal ID, so your shop can be approved.",

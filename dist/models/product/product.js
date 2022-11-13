@@ -46,7 +46,7 @@ const schema = new mongoose_1.Schema({
     description: {
         type: String,
         minLength: 5,
-        maxLength: 250,
+        maxLength: 5000,
         trim: true,
         required: true,
     },
@@ -96,7 +96,7 @@ function validateAddOrEditProdData(data) {
         name: validators.string("Product name", { min: 2, max: 250 }),
         description: validators.string("Product description", {
             min: 5,
-            max: 500,
+            max: 5000,
         }),
         price: joi_1.default.object({
             original: joi_1.default.number().min(100).allow("", null).label("Original price"),

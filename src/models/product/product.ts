@@ -21,7 +21,7 @@ const schema = new Schema<productTypes.Product>(
     description: {
       type: String,
       minLength: 5,
-      maxLength: 250,
+      maxLength: 5000,
       trim: true,
       required: true,
     },
@@ -77,7 +77,7 @@ export function validateAddOrEditProdData(
     name: validators.string("Product name", { min: 2, max: 250 }),
     description: validators.string("Product description", {
       min: 5,
-      max: 500,
+      max: 5000,
     }),
     price: Joi.object({
       original: Joi.number().min(100).allow("", null).label("Original price"),
