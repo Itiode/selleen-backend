@@ -8,7 +8,6 @@ const config_1 = __importDefault(require("config"));
 const axios_1 = __importDefault(require("axios"));
 const payment_event_1 = __importDefault(require("../../models/payment-event"));
 const processEvent = async (req, res, next) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
     try {
         const secretHash = config_1.default.get("flutterwaveSecretHash");
         const signature = req.headers["verif-hash"];
@@ -28,25 +27,25 @@ const processEvent = async (req, res, next) => {
         }
         if (!existingEvent) {
             await new payment_event_1.default({
-                id: payload === null || payload === void 0 ? void 0 : payload.id,
+                id: payload?.id,
                 eventType: payload["event.type"],
-                txRef: payload === null || payload === void 0 ? void 0 : payload.txRef,
-                flwRef: payload === null || payload === void 0 ? void 0 : payload.flwRef,
-                amount: payload === null || payload === void 0 ? void 0 : payload.amount,
-                chargedAmount: payload === null || payload === void 0 ? void 0 : payload.charged_amount,
-                status: payload === null || payload === void 0 ? void 0 : payload.status,
+                txRef: payload?.txRef,
+                flwRef: payload?.flwRef,
+                amount: payload?.amount,
+                chargedAmount: payload?.charged_amount,
+                status: payload?.status,
                 customer: {
-                    id: (_a = payload === null || payload === void 0 ? void 0 : payload.customer) === null || _a === void 0 ? void 0 : _a.id,
-                    fullName: (_b = payload === null || payload === void 0 ? void 0 : payload.customer) === null || _b === void 0 ? void 0 : _b.fullName,
-                    phoneNumber: (_c = payload === null || payload === void 0 ? void 0 : payload.customer) === null || _c === void 0 ? void 0 : _c.phone,
-                    email: (_d = payload === null || payload === void 0 ? void 0 : payload.customer) === null || _d === void 0 ? void 0 : _d.email,
-                    createdAt: (_e = payload === null || payload === void 0 ? void 0 : payload.customer) === null || _e === void 0 ? void 0 : _e.createdAt,
+                    id: payload?.customer?.id,
+                    fullName: payload?.customer?.fullName,
+                    phoneNumber: payload?.customer?.phone,
+                    email: payload?.customer?.email,
+                    createdAt: payload?.customer?.createdAt,
                 },
                 entity: {
-                    accountNumber: (_f = payload === null || payload === void 0 ? void 0 : payload.entity) === null || _f === void 0 ? void 0 : _f.account_number,
-                    firstName: (_g = payload === null || payload === void 0 ? void 0 : payload.entity) === null || _g === void 0 ? void 0 : _g.first_name,
-                    lastName: (_h = payload === null || payload === void 0 ? void 0 : payload.entity) === null || _h === void 0 ? void 0 : _h.last_name,
-                    createdAt: (_j = payload === null || payload === void 0 ? void 0 : payload.entity) === null || _j === void 0 ? void 0 : _j.createdAt,
+                    accountNumber: payload?.entity?.account_number,
+                    firstName: payload?.entity?.first_name,
+                    lastName: payload?.entity?.last_name,
+                    createdAt: payload?.entity?.createdAt,
                 },
             }).save();
         }

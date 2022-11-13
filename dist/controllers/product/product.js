@@ -25,13 +25,12 @@ const getProduct = async (req, res, next) => {
 };
 exports.getProduct = getProduct;
 const getProducts = async (req, res, next) => {
-    var _a, _b;
     try {
         const searchText = req.query.searchText;
         const pageNumber = +req.query.pageNumber;
         const pageSize = +req.query.pageSize;
-        const lat = (_a = req.query) === null || _a === void 0 ? void 0 : _a.lat;
-        const lng = (_b = req.query) === null || _b === void 0 ? void 0 : _b.lng;
+        const lat = req.query?.lat;
+        const lng = req.query?.lng;
         let prods = [];
         if (searchText) {
             prods = await product_1.default.find({
@@ -72,7 +71,6 @@ const getProducts = async (req, res, next) => {
 };
 exports.getProducts = getProducts;
 const getShopProducts = async (req, res, next) => {
-    var _a, _b;
     try {
         const { error } = (0, shared_1.validateSimpleReqParam)(req.params);
         if (error)
@@ -81,8 +79,8 @@ const getShopProducts = async (req, res, next) => {
         const searchText = req.query.searchText;
         const pageNumber = +req.query.pageNumber;
         const pageSize = +req.query.pageSize;
-        const lat = (_a = req.query) === null || _a === void 0 ? void 0 : _a.lat;
-        const lng = (_b = req.query) === null || _b === void 0 ? void 0 : _b.lng;
+        const lat = req.query?.lat;
+        const lng = req.query?.lng;
         let prods = [];
         if (searchText) {
             prods = await product_1.default.find({
