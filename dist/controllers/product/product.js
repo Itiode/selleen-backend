@@ -33,6 +33,7 @@ const getProducts = async (req, res, next) => {
         const lng = req.query.lng;
         let prods = [];
         if (searchText) {
+            console.log("if");
             prods = await product_1.default.find({
                 $text: { $search: searchText },
                 approved: true,
@@ -42,6 +43,7 @@ const getProducts = async (req, res, next) => {
                 .select("name price shop images");
         }
         else if (!lat || !lng) {
+            console.log("else if");
             prods = await product_1.default.find({
                 approved: true,
             })
@@ -50,6 +52,7 @@ const getProducts = async (req, res, next) => {
                 .select("name price shop images");
         }
         else {
+            console.log("else");
             prods = await product_1.default.find({
                 approved: true,
                 location: {
