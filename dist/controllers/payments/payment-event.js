@@ -15,6 +15,7 @@ const processEvent = async (req, res, next) => {
             return res.status(401).end();
         }
         const payload = req.body;
+        console.log('payload in processEvent', payload);
         // Event exists and status hasn't changed. Discard request.
         const existingEvent = await payment_event_1.default.findOne({ id: payload.id });
         if (existingEvent && existingEvent.status === payload.status) {

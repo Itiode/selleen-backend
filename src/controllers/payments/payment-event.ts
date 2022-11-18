@@ -21,6 +21,8 @@ export const processEvent: RequestHandler<any, any, PaymentEvent> = async (
 
     const payload = req.body;
 
+    console.log('payload in processEvent', payload);
+
     // Event exists and status hasn't changed. Discard request.
     const existingEvent = await PaymentEventModel.findOne({ id: payload.id });
     if (existingEvent && existingEvent.status === payload.status) {
