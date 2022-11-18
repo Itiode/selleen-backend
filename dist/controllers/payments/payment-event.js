@@ -15,38 +15,33 @@ const processEvent = async (req, res, next) => {
             return res.status(401).end();
         }
         const payload = req.body;
-        console.log('payload in processEvent', payload);
         // Event exists and status hasn't changed. Discard request.
-        const existingEvent = await payment_event_1.default.findOne({ id: payload.id });
-        if (existingEvent && existingEvent.status === payload.status) {
+        const existingEvent = await payment_event_1.default.findOne({
+            id: payload?.data?.id,
+        });
+        if (existingEvent && existingEvent.status === payload?.data?.status) {
             return res.status(200).end();
         }
         res.status(200).end();
         // Event exists and status has changed. Update.
-        if (existingEvent && existingEvent.status !== payload.status) {
-            await payment_event_1.default.updateOne({ id: payload.id }, { status: payload.status });
+        if (existingEvent && existingEvent.status !== payload?.data?.status) {
+            await payment_event_1.default.updateOne({ id: payload?.data?.id }, { status: payload?.data?.status });
         }
         if (!existingEvent) {
             await new payment_event_1.default({
-                id: payload?.id,
+                id: payload?.data?.id,
                 eventType: payload["event.type"],
-                txRef: payload?.txRef,
-                flwRef: payload?.flwRef,
-                amount: payload?.amount,
-                chargedAmount: payload?.charged_amount,
-                status: payload?.status,
+                txRef: payload?.data?.tx_ref,
+                flwRef: payload?.data?.flw_ref,
+                amount: payload?.data?.amount,
+                chargedAmount: payload?.data?.charged_amount,
+                status: payload?.data?.status,
                 customer: {
-                    id: payload?.customer?.id,
-                    fullName: payload?.customer?.fullName,
-                    phoneNumber: payload?.customer?.phone,
-                    email: payload?.customer?.email,
-                    createdAt: payload?.customer?.createdAt,
-                },
-                entity: {
-                    accountNumber: payload?.entity?.account_number,
-                    firstName: payload?.entity?.first_name,
-                    lastName: payload?.entity?.last_name,
-                    createdAt: payload?.entity?.createdAt,
+                    id: payload?.data?.customer?.id,
+                    fullName: payload?.data?.customer?.name,
+                    phoneNumber: payload?.data?.customer?.phone_number,
+                    email: payload?.data?.customer?.email,
+                    createdAt: payload?.data?.customer?.created_at,
                 },
             }).save();
         }
@@ -54,9 +49,9 @@ const processEvent = async (req, res, next) => {
         // or a new event with successful status. Give value.
         if ((existingEvent &&
             existingEvent.status !== "successful" &&
-            payload.status === "successful") ||
-            (!existingEvent && payload.status === "successful")) {
-            const userId = payload.txRef.split("USER_ID=")[1];
+            payload?.data?.status === "successful") ||
+            (!existingEvent && payload?.data?.status === "successful")) {
+            const userId = payload?.data?.tx_ref.split("USER_ID=")[1];
             const url = `${config_1.default.get("appApiUrl")}orders/place-order/${userId}`;
             await (0, axios_1.default)({
                 url,

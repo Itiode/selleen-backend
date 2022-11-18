@@ -1,24 +1,19 @@
 export interface PaymentEvent {
-  id: string;
   "event.type": string;
-  type: "BANK_TRANSFER_TRANSACTION";
-  txRef: string;
-  flwRef: string;
-  amount: string;
-  charged_amount: string;
-  status: string;
-  customer: {
-    id: number;
-    fullName: string;
-    phone: string;
-    email: string;
-    createdAt: string;
-  };
-  entity: {
-    account_number: string;
-    first_name: string;
-    last_name: string;
-    createdAt: string;
+  data: {
+    id: string;
+    tx_ref: string;
+    flw_ref: string;
+    amount: string;
+    charged_amount: string;
+    status: string;
+    customer: {
+      id: number;
+      name: string;
+      phone_number: string;
+      email: string;
+      created_at: string;
+    };
   };
 }
 
@@ -35,12 +30,6 @@ export interface CustomPaymentEvent {
     fullName: string;
     phoneNumber: string;
     email: string;
-    createdAt: string;
-  };
-  entity: {
-    accountNumber: string;
-    firstName: string;
-    lastName: string;
     createdAt: string;
   };
 }

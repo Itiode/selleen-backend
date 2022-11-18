@@ -6,7 +6,6 @@ const schema = new Schema<CustomPaymentEvent>(
   {
     id: { type: String, trim: true, unique: true },
     eventType: { type: String, trim: true },
-    type: { type: String, enum: ["BANK_TRANSFER_TRANSACTION"] },
     txRef: { type: String, trim: true },
     flwRef: { type: String, trim: true },
     amount: { type: String, trim: true },
@@ -17,12 +16,6 @@ const schema = new Schema<CustomPaymentEvent>(
       email: { type: String, trim: true },
       createdAt: { type: Date },
       phoneNumber: { type: String, trim: true },
-    },
-    entity: {
-      accountNumber: { type: String, trim: true },
-      firstName: { type: String, trim: true },
-      lastName: { type: String, trim: true },
-      createdAt: { type: String, trim: true },
     },
   },
   { timestamps: true }

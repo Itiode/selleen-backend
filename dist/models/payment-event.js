@@ -27,7 +27,6 @@ const mongoose_1 = __importStar(require("mongoose"));
 const schema = new mongoose_1.Schema({
     id: { type: String, trim: true, unique: true },
     eventType: { type: String, trim: true },
-    type: { type: String, enum: ["BANK_TRANSFER_TRANSACTION"] },
     txRef: { type: String, trim: true },
     flwRef: { type: String, trim: true },
     amount: { type: String, trim: true },
@@ -38,12 +37,6 @@ const schema = new mongoose_1.Schema({
         email: { type: String, trim: true },
         createdAt: { type: Date },
         phoneNumber: { type: String, trim: true },
-    },
-    entity: {
-        accountNumber: { type: String, trim: true },
-        firstName: { type: String, trim: true },
-        lastName: { type: String, trim: true },
-        createdAt: { type: String, trim: true },
     },
 }, { timestamps: true });
 const PaymentEventModel = mongoose_1.default.model("Payment-Event", schema);
